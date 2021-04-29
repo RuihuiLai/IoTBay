@@ -32,7 +32,6 @@
             String phoneNumber = request.getParameter("phone_number");
             String address = streetNumber + "§" + streetName + "§" + suburb + "§" + state + "§" + zipcode;
             Customer customer = new Customer(1, firstName, lastName, email, password, gender, address, phoneNumber, false);
-            customer.store();
             session.setAttribute("customer", customer);
         %>
     </body>

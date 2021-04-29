@@ -6,10 +6,6 @@
 package iotbay.model;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  *
@@ -100,19 +96,6 @@ public class User implements Serializable{
         this.phoneNumber = phoneNumber;
     }
     
-    public int store() throws ClassNotFoundException, SQLException{
-    Class.forName("org.apache.derby.jdbc.ClientDriver");
-    Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/iotdb; user=iotuser; password=admin");
-    PreparedStatement ps = con.prepareStatement("INSERT INTO \"USER\" (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GENDER, ADDRESS, PHONENUMBER) VALUES(?,?,?,?,?,?,?)");
-    ps.setString(1,firstName);
-    ps.setString(2,lastName);
-    ps.setString(3,eMail);
-    ps.setString(4,password);
-    ps.setString(5,gender);
-    ps.setString(6,address);
-    ps.setString(7,phoneNumber);
-    return(ps.executeUpdate());
-    }
 }
 
 
