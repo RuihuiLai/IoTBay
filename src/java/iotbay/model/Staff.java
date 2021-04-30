@@ -12,12 +12,14 @@ import java.util.Date;
  */
 public class Staff extends User{
     private Date startDate;
-    private int contractLength;
+    private Date endDate;
+    private String position;
 
-    public Staff(Date startDate, int contractLength, int userID, String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber) {
-        super(userID, firstName, lastName, eMail, password, gender, address, phoneNumber);
+    public Staff(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, Date dateOfBirth, String phoneNumber, Date startDate, Date endDate, String position) {
+        super(userID, firstName, lastName, eMail, password, gender, address, dateOfBirth, phoneNumber);
         this.startDate = startDate;
-        this.contractLength = contractLength;
+        this.endDate = endDate;
+        this.position = position;
     }
 
     public Date getStartDate() {
@@ -28,13 +30,20 @@ public class Staff extends User{
         this.startDate = startDate;
     }
 
-    public int getContractLength() {
-        return contractLength;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setContractLength(int contractLength) {
-        this.contractLength = contractLength;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
-    
-    
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
 }

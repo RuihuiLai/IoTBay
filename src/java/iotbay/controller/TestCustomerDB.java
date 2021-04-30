@@ -11,24 +11,24 @@ import java.util.logging.*;
 import iotbay.model.Customer;
 import iotbay.model.dao.*;
 
-public class TestDB {
+public class TestCustomerDB {
 
     private static Scanner in = new Scanner(System.in);
     private DBConnector connector;
     private Connection conn;
-    private DBManager db;
+    private DBCustomerManager db;
 
     public static void main(String[] args) throws SQLException {
-        (new TestDB()).runQueries();
+        (new TestCustomerDB()).runQueries();
     }
 
-    public TestDB() {
+    public TestCustomerDB() {
         try {
             connector = new DBConnector();
             conn = connector.openConnection();
-            db = new DBManager(conn);
+            db = new DBCustomerManager(conn);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -70,28 +70,32 @@ public class TestDB {
         String first = in.nextLine();
         System.out.print("Last name: ");
         String last = in.nextLine();
-        System.out.print("User email: ");
+        System.out.print("CUSTOMER email: ");
         String email = in.nextLine();
-        System.out.print("User password: ");
+        System.out.print("CUSTOMER password: ");
         String password = in.nextLine();
-        System.out.print("User gender: ");
+        System.out.print("CUSTOMER gender: ");
         String gender = in.nextLine();
-        System.out.print("User address: ");
+        System.out.print("CUSTOMER address: ");
         String address = in.nextLine();
-        System.out.print("User number: ");
+        System.out.print("CUSTOMER date of birth: ");
+        String dob = in.nextLine();
+        System.out.print("CUSTOMER number: ");
         String number = in.nextLine();
+        System.out.print("CUSTOMER subscription: ");
+        String sub = in.nextLine();
         try {
-            db.addCustomer(first, last, email, password, gender, address, number);
+            db.addCustomer(first, last, email, password, gender, address, dob, number, sub);
         } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("User is added to the database.");
+        System.out.println("CUSTOMER is added to the database.");
     }
 
     private void readCustomer() throws SQLException {
-        System.out.print("User email: ");
+        System.out.print("CUSTOMER email: ");
         String email = in.nextLine();
-        System.out.print("User password:");
+        System.out.print("CUSTOMER password:");
         String password = in.nextLine();
         Customer customer = db.findCustomer(email, password);
         if (customer != null) {
@@ -103,37 +107,41 @@ public class TestDB {
     }
 
     private void updateCustomer() {
-        System.out.print("User id: ");
+        System.out.print("CUSTOMER id: ");
         String id = in.nextLine();
 
         try {
             if (db.checkCustomer(id)) {
-                System.out.println("Custimer found, enter new info");
+                System.out.println("Customer found, enter new info");
                 System.out.print("First name: ");
                 String first = in.nextLine();
                 System.out.print("Last name: ");
                 String last = in.nextLine();
-                System.out.print("User email: ");
+                System.out.print("CUSTOMER email: ");
                 String email = in.nextLine();
-                System.out.print("User password: ");
+                System.out.print("CUSTOMER password: ");
                 String password = in.nextLine();
-                System.out.print("User gender: ");
+                System.out.print("CUSTOMER gender: ");
                 String gender = in.nextLine();
-                System.out.print("User address: ");
+                System.out.print("CUSTOMER address: ");
                 String address = in.nextLine();
-                System.out.print("User number: ");
+                System.out.print("CUSTOMER date of birth: ");
+                String dob = in.nextLine();
+                System.out.print("CUSTOMER number: ");
                 String number = in.nextLine();
-                db.updateCustomer(id, first, last, email, password, gender, address, number);
+                System.out.print("CUSTOMER subscription: ");
+                String sub = in.nextLine();
+                db.updateCustomer(id, first, last, email, password, gender, address, dob, number, sub);
             } else {
                 System.out.println("Customer not found");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void deleteCustomer() {
-        System.out.print("User id: ");
+        System.out.print("CUSTOMER id: ");
         String id = in.nextLine();
 
         try {
@@ -144,20 +152,20 @@ public class TestDB {
                 System.out.println("Customer not found");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        private void listCustomer() {
+
+    private void listCustomer() {
         try {
             ArrayList<Customer> customers = db.fetchCustomers();
             System.out.println("CUSTOMERS TABLE:");
-            customers.stream().forEach((customer) ->{
-                System.out.printf("%-10s %-15s %-15s %-20s %-15s %-8s %-40s %-15s\n", customer.getUserID(), customer.getFirstName(), customer.getLastName(), customer.geteMail(), customer.getPassword(), customer.getGender(), customer.getAddress(), customer.getPhoneNumber());
+            customers.stream().forEach((customer) -> {
+                System.out.printf("%-10s %-15s %-15s %-20s %-15s %-8s %-40s %-15s %-15s %-15s\n", customer.getUserID(), customer.getFirstName(), customer.getLastName(), customer.geteMail(), customer.getPassword(), customer.getGender(), customer.getAddress(), customer.getDateOfBirth(), customer.getPhoneNumber(), customer.isSubscription());
             });
             System.out.println();
         } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
