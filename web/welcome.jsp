@@ -3,6 +3,7 @@
     Created on : Mar 19, 2021, 12:40:08 PM
     Author     : Reyvaldo
 --%>
+<%@page import="java.util.Date"%>
 <%@page import="iotbay.model.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,7 +32,8 @@
             String zipcode = request.getParameter("zipcode");
             String phoneNumber = request.getParameter("phone_number");
             String address = streetNumber + "§" + streetName + "§" + suburb + "§" + state + "§" + zipcode;
-            Customer customer = new Customer(1, firstName, lastName, email, password, gender, address, phoneNumber, false);
+            Date date = new Date();
+            Customer customer = new Customer(1, firstName, lastName, email, password, gender, address,date, phoneNumber, false);
             session.setAttribute("customer", customer);
         %>
     </body>
