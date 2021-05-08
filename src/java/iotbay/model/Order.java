@@ -16,14 +16,14 @@ public class Order implements Serializable{
     private int orderID;
     private String status;
     private Date orderTime;
-    private String shipmentID;
-    private String paymentID;
-    private String userID;
+    private int shipmentID;
+    private int paymentID;
+    private int userID;
     private Double totalPrice;
 
-    public Order(int orderID, String status, Date orderTime, String shipmentID, String paymentID, String userID, Double totalPrice) {
+    public Order(int orderID, String status, Date orderTime, int shipmentID, int paymentID, int userID, Double totalPrice) {
         this.orderID = orderID;
-        this.status = status;
+        this.status = status;   
         this.orderTime = orderTime;
         this.shipmentID = shipmentID;
         this.paymentID = paymentID;
@@ -55,27 +55,27 @@ public class Order implements Serializable{
         this.orderTime = orderTime;
     }
 
-    public String getShipmentID() {
+    public int getShipmentID() {
         return shipmentID;
     }
 
-    public void setShipmentID(String shipmentID) {
+    public void setShipmentID(int shipmentID) {
         this.shipmentID = shipmentID;
     }
 
-    public String getPaymentID() {
+    public int getPaymentID() {
         return paymentID;
     }
 
-    public void setPaymentID(String paymentID) {
+    public void setPaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 

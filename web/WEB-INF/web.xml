@@ -5,9 +5,49 @@
         <servlet-class>iotbay.controller.ConnServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>ProductCreateServlet</servlet-name>
+        <servlet-class>iotbay.controller.ProductCreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductListServlet</servlet-name>
+        <servlet-class>iotbay.controller.ProductListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductEditServlet</servlet-name>
+        <servlet-class>iotbay.controller.ProductEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductUpdateServlet</servlet-name>
+        <servlet-class>iotbay.controller.ProductUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <servlet-class>iotbay.controller.ProductDeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductCreateServlet</servlet-name>
+        <url-pattern>/ProductCreateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductListServlet</servlet-name>
+        <url-pattern>/ProductListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductEditServlet</servlet-name>
+        <url-pattern>/ProductEditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductUpdateServlet</servlet-name>
+        <url-pattern>/ProductUpdateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <url-pattern>/ProductDeleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

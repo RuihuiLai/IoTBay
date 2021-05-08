@@ -19,33 +19,42 @@
         <title>Main Page</title>
     </head>
     <body>
-        <span id="links"> <a href="staff_prod_list.jsp"> prod_edit</a> |<a href="product_upload.jsp"> upload</a> | <a href="logout.jsp"> Logout</a></span>
+        <span id="links"><a href="ProductListServlet"> prod_edit</a> | <a href="logout.jsp"> Logout</a></span>
         <h1>Main page</h1>
         <%
             DBConnector connector = new DBConnector();
             Connection conn = connector.openConnection();
             DBProductManager db = new DBProductManager(conn);
-            ArrayList<Product> products = db.fetchProducts();
+            String filter = request.getParameter("filter");
+            if(filter==null){
+                filter = "";
+            }
+            ArrayList<Product> products = db.searchProducts(filter);
+            
         %>
         <div class="mainTable">
-
+            <form action="main.jsp" method="get">
+                <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>">
+                <input type="submit" id="submit">
+            </form>
             <table>
                 <%
-                    int i=0;
+                    int i = 0;
                     for (Product product : products) {
-                        i++;
-                        if(i%6==0){
-                            %>
-                            <tr></tr>
+
+                        if (i % 5 == 0) {
+                %>
+                <tr></tr>
                 <%
-                        }
+                    }
+                    i++;
                 %>
                 <td>
                     <a href="product.jsp?ID=<%=product.getProductID()%>">
                         <center><img src="productPictures/<%=product.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="128" width="128"><br>
-                        <%=product.getName()%><br>
-                        $ <%=product.getPrice()%><br>
-                        Stock <%=product.getStock()%><br>
+                            <%=product.getName()%><br>
+                            $ <%=product.getPrice()%><br>
+                            Stock <%=product.getStock()%><br>
                         </center>
                     </a>
                 </td>
