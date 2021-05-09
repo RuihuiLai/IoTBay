@@ -12,12 +12,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/layout.css">
+        <span id="links"><a href="MainPageServlet"> main</a> | <a href="logout.jsp"> Logout</a></span>
         <%
-            DBConnector connector = new DBConnector();
-            Connection conn = connector.openConnection();
-            DBProductManager db = new DBProductManager(conn);
-            int prodID = Integer.parseInt(request.getParameter("ID"));
-            Product prod = db.findProduct(prodID);
+            Product prod = (Product) request.getAttribute("product");
         %>
         <title><%=prod.getName()%></title>
     </head>

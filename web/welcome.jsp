@@ -17,7 +17,7 @@
         <div class="welcome">
             <h1> Welcome!</h1>
             <p>welcome to the IoTBay Website!</p><br>
-            <h6>please <a href="main.jsp"> click here</a> to be moved to main page</h6>
+            <h6>please <a href="MainPageServlet"> click here</a> to be moved to main page</h6>
         </div>
         <%
             String firstName = request.getParameter("first_name");

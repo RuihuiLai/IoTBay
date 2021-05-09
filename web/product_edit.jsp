@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/layout.css">
     <span id="links"> <a href="ProductListServlet"> staff item view</a></span>
     <title>edit Product</title>
 </head>
@@ -23,7 +24,7 @@
      String descErr = (String) request.getAttribute("descErr");
      String catErr = (String) request.getAttribute("catErr");
  %>
-    <form action="ProductUpdateServlet" method="post" enctype="multipart/form-data">
+    <form action="ProductUpdateServlet" method="post" enctype="multipart/form-data" autocomplete="off">
         <table>
             <td><img id="myimage" src="productPictures/<%=prod.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="256" width="256"><br>
                 <input class ="upload" type="file" name="image" id="image" accept="image/*" onchange="updatePicture()"></td>

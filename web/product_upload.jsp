@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/layout.css">
     <span id="links"> <a href="ProductListServlet"> staff item view</a></span>
     <title>Add Product</title>
 </head>
@@ -26,7 +27,7 @@
         String descErr = (String) request.getAttribute("descErr");
         String catErr = (String) request.getAttribute("catErr");
     %>
-    <form action="ProductCreateServlet" method="POST" enctype="multipart/form-data">
+    <form action="ProductCreateServlet" method="POST" enctype="multipart/form-data" autocomplete="off">
         <table>
             <tr><td>Item name</td><td><input type="text" name="name" value="<%=(name != null ? name : "")%>" required></td><td><%=(nameErr != null ? nameErr : "")%></td></tr>
             <tr><td>Category</td><td><input type="text" name="category" placeholder="category1/category2/category3" value="<%=(cat != null ? cat : "")%>"required></td><td><%=(catErr != null ? catErr : "")%></td></tr>

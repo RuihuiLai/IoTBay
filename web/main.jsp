@@ -22,21 +22,26 @@
         <span id="links"><a href="ProductListServlet"> prod_edit</a> | <a href="logout.jsp"> Logout</a></span>
         <h1>Main page</h1>
         <%
-            DBConnector connector = new DBConnector();
-            Connection conn = connector.openConnection();
-            DBProductManager db = new DBProductManager(conn);
-            String filter = request.getParameter("filter");
-            if(filter==null){
-                filter = "";
-            }
-            ArrayList<Product> products = db.searchProducts(filter);
-            
+            ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("list");
+            ArrayList<String> listCategory = (ArrayList<String>) request.getAttribute("cate");
+            String filter = (String) request.getAttribute("filter");
+            String cat = (String) request.getAttribute("cat");
+            int length = products.size();
         %>
+
         <div class="mainTable">
-            <form action="main.jsp" method="get">
-                <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>">
-                <input type="submit" id="submit">
-            </form>
+            item count: <%=length%>
+            <form action="MainPageServlet" method="post" autocomplete="off">
+                <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>" placeholder="item name">
+                <input list="categories" name="category" value="<%=(cat != null ? cat : "")%>" placeholder="category">
+                <datalist id = "categories">
+                    <option value="ALL">
+                        <%for (String category : listCategory) {%>
+                    <option value="<%=category%>">
+                        <%}%>
+                </datalist>
+                <input type="submit" id="submit" name="submit" value="search">
+            </form><br>
             <table>
                 <%
                     int i = 0;
@@ -50,7 +55,7 @@
                     i++;
                 %>
                 <td>
-                    <a href="product.jsp?ID=<%=product.getProductID()%>">
+                    <a href="ProductViewServlet?ID=<%=product.getProductID()%>">
                         <center><img src="productPictures/<%=product.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="128" width="128"><br>
                             <%=product.getName()%><br>
                             $ <%=product.getPrice()%><br>

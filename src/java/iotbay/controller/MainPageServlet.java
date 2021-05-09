@@ -7,11 +7,7 @@ package iotbay.controller;
 
 import iotbay.model.Product;
 import iotbay.model.dao.DBProductManager;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,13 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Reyvaldo
  */
-public class ProductListServlet extends HttpServlet {
+public class MainPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,12 +45,13 @@ public class ProductListServlet extends HttpServlet {
                 request.setAttribute("cat", "ALL");
             }
             request.setAttribute("cate", categories);
-            request.getRequestDispatcher("staff_prod_list.jsp").include(request, response);
+            request.getRequestDispatcher("main.jsp").include(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBProductManager manager = (DBProductManager) session.getAttribute("manager");
@@ -65,7 +61,7 @@ public class ProductListServlet extends HttpServlet {
             ArrayList<String> categories = manager.getCategories();
             request.setAttribute("list", products);
             request.setAttribute("cate", categories);
-            request.getRequestDispatcher("staff_prod_list.jsp").include(request, response);
+            request.getRequestDispatcher("main.jsp").include(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

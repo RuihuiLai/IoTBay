@@ -13,23 +13,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <span id="links"> <a href="main.jsp"> main</a> | <a href="product_upload.jsp"> new product</a></span>
-        <link rel="stylesheet" href="css/staff_prod_list.css">
-        <title>STAFF VIEW</title>
-    </head>
-    <body>
-        <h1>Product list</h1>
-        <%
-            ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("list");
-            String filter = (String) request.getAttribute("filter");
-            int length = products.size();
-        %>
+    <span id="links"> <a href="MainPageServlet"> main</a> | <a href="product_upload.jsp"> new product</a></span>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/staff_prod_list.css">
+    <title>STAFF VIEW</title>
+</head>
+<body>
+    <h1>Product list</h1>
+    <%
+        ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("list");
+        ArrayList<String> listCategory = (ArrayList<String>) request.getAttribute("cate");
+        String filter = (String) request.getAttribute("filter");
+        String cat = (String) request.getAttribute("cat");
+        int length = products.size();
+    %>
     item count: <%=length%>
-        <form action="ProductListServlet" method="post">
-            <input type="text" name="filter" value="<%=(filter!=null ? filter:"")%>">
-            <input type="submit" id="submit" name="submit" value="search">
-        </form>
-        <div class="mainTable">
+    <form action="ProductListServlet" method="post" autocomplete="off">
+        <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>" placeholder="item name">
+        <input list="categories" name="category" value="<%=(cat != null ? cat : "")%>" placeholder="category">
+        <datalist id = "categories">
+            <option value="ALL">
+                <%for (String category : listCategory) {%>
+            <option value="<%=category%>">
+                <%}%>
+        </datalist>
+        <input type="submit" id="submit" name="submit" value="search">
+    </form>
+    <div class="mainTable">
         <table>
             <th>Number</th><th>Picture</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Edit</th><th>Delete</th>
                 <%
@@ -45,8 +55,8 @@
                 <td><a href="ProductEditServlet?ID=<%=product.getProductID()%>">edit</a></td>
                 <td><a href="ProductDeleteServlet?ID=<%=product.getProductID()%>" onclick="">delete</a></td>
             </tr>
-                <%}%>
+            <%}%>
         </table>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

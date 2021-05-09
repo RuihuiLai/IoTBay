@@ -8,6 +8,7 @@ package iotbay.model.dao;
 import iotbay.model.Product;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -87,8 +88,9 @@ public class DBProductManager {
         }
         return products;
     }
-        public ArrayList<Product> searchProducts(String filter) throws SQLException {
-        ResultSet rs = st.executeQuery("SELECT * FROM IOTUSER.PRODUCT WHERE LOWER(\"NAME\") LIKE '%"+filter+"%'");
+
+    public ArrayList<Product> searchProducts(String filter) throws SQLException {
+        ResultSet rs = st.executeQuery("SELECT * FROM IOTUSER.PRODUCT WHERE LOWER(\"NAME\") LIKE '%" + filter + "%'");
         ArrayList<Product> products = new ArrayList();
 
         while (rs.next()) {
@@ -109,5 +111,39 @@ public class DBProductManager {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<String> getCategories() throws SQLException {
+        ResultSet rs = st.executeQuery("SELECT * FROM IOTUSER.PRODUCT");
+        ArrayList<String> categoryList = new ArrayList();
+
+        while (rs.next()) {
+            String category = rs.getString(3);
+            String lower = category.toLowerCase();
+            String[] lowerSplit = lower.split("/");
+            for (String s : lowerSplit) {
+                categoryList.add(s);
+            }
+        }
+        LinkedHashSet<String> hashSet = new LinkedHashSet<>(categoryList);
+
+        ArrayList<String> listWithoutDuplicates = new ArrayList<>(hashSet);
+        return listWithoutDuplicates;
+    }
+
+    public ArrayList<Product> filterCategoryAndName(String filter, String cat) throws SQLException {
+        ResultSet rs = st.executeQuery("SELECT * FROM IOTUSER.PRODUCT WHERE LOWER(\"NAME\") LIKE '%" + filter + "%' AND LOWER(CATEGORY) LIKE '%" + cat + "%'");
+        ArrayList<Product> products = new ArrayList();
+
+        while (rs.next()) {
+            int productID = rs.getInt(1);
+            String productName = rs.getString(2);
+            String category = rs.getString(3);
+            double price = rs.getDouble(4);
+            String description = rs.getString(5);
+            int stock = rs.getInt(6);
+            products.add(new Product(productID, productName, category, price, description, stock));
+        }
+        return products;
     }
 }
