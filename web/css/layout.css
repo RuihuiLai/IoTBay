@@ -37,7 +37,7 @@ html, body {
     opacity: 0.7;
 }
 #links{
-    position: fixed;
+    position: absolute;
     font-size: 20px;
     word-spacing: 2px;
     top: 5px;

@@ -19,7 +19,7 @@
     <title>STAFF VIEW</title>
 </head>
 <body>
-    <h1>Product list</h1>
+    <h1>Staff Product list</h1>
     <%
         ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("list");
         ArrayList<String> listCategory = (ArrayList<String>) request.getAttribute("cate");
@@ -27,8 +27,8 @@
         String cat = (String) request.getAttribute("cat");
         int length = products.size();
     %>
-    item count: <%=length%>
-    <form action="ProductListServlet" method="post" autocomplete="off">
+    <center>item count: <%=length%>
+    <center><form action="ProductListServlet" method="post" autocomplete="off">
         <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>" placeholder="item name">
         <input list="categories" name="category" value="<%=(cat != null ? cat : "")%>" placeholder="category">
         <datalist id = "categories">
@@ -41,19 +41,19 @@
     </form>
     <div class="mainTable">
         <table>
-            <th>Number</th><th>Picture</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Edit</th><th>Delete</th>
+            <th>Number</th><th style="text-align: center">Picture</th><th>Name</th><th>Category</th><th style="text-align: center">Price</th><th style="text-align: center">Stock</th><th style="text-align: center">Edit</th><th style="text-align: center">Delete</th>
                 <%
                     for (Product product : products) {
                 %>
             <tr>
                 <td><%=product.getProductID()%></td>
-                <td><img src="productPictures/<%=product.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="64" width="64"></td>
+                <td style="text-align: center"><img src="productPictures/<%=product.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="64" width="64"></td>
                 <td><%=product.getName()%></td>
                 <td><%=product.getCategory()%></td>
-                <td><%=product.getPrice()%></td>
-                <td><%=product.getStock()%></td>
-                <td><a href="ProductEditServlet?ID=<%=product.getProductID()%>">edit</a></td>
-                <td><a href="ProductDeleteServlet?ID=<%=product.getProductID()%>" onclick="">delete</a></td>
+                <td style="text-align: center"><%=product.getPrice()%></td>
+                <td style="text-align: center"><%=product.getStock()%></td>
+                <td style="text-align: center"><a href="ProductEditServlet?ID=<%=product.getProductID()%>">edit</a></td>
+                <td style="text-align: center"><a href="ProductDeleteServlet?ID=<%=product.getProductID()%>" onclick="">delete</a></td>
             </tr>
             <%}%>
         </table>

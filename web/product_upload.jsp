@@ -33,7 +33,7 @@
             <tr><td>Category</td><td><input type="text" name="category" placeholder="category1/category2/category3" value="<%=(cat != null ? cat : "")%>"required></td><td><%=(catErr != null ? catErr : "")%></td></tr>
             <tr><td>Price</td><td> $<input type="number" name="price" value="<%=(price !=null ? price:"")%>" required min="0" step="0.01"></td><td><%=(priceErr != null ? priceErr : "")%></td></tr>
             <tr><td>Stock</td><td><input type="number" name="stock" value="<%=(stock != null ? stock : "")%>" required min="0"></td><td><%=(stockErr != null ? stockErr : "")%></td></tr>
-            <tr><td>Description</td><td><input type="text" name="desc" value="<%=(desc !=null ? desc:"")%>" required></td><td><%=(descErr != null ? descErr : "")%></td></tr>
+            <tr><td>Description</td><td><textarea name="desc" rows="5" cols="100"required><%=(desc !=null ? desc:"")%></textarea></td><td><%=(descErr != null ? descErr : "")%></td></tr>
             <tr><td><input class ="upload" type="file" name="image" id="image" accept="image/*" value="choose an image"></td><td><input type="submit" id="submit" name="submit" value="Submit"></td></tr>
         </table>
     </form>

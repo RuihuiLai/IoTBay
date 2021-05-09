@@ -29,7 +29,7 @@
             int length = products.size();
         %>
 
-        <div class="mainTable">
+        <center><div class="mainTable">
             item count: <%=length%>
             <form action="MainPageServlet" method="post" autocomplete="off">
                 <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>" placeholder="item name">
