@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +40,7 @@ public class ProductUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        Validator validator = new Validator();
         int prodID = Integer.parseInt(request.getParameter("ID"));
         String nameN = request.getParameter("name");
         String catN = request.getParameter("category");
@@ -50,24 +50,54 @@ public class ProductUpdateServlet extends HttpServlet {
         String buildPath = getServletContext().getRealPath("");
         String iotBayPath = buildPath.substring(0, buildPath.length() - 9);
         String uploadPath = iotBayPath + "web/productPictures";
+        if (stockN.equals("")) {
+            stockN = "-1";
+        }
+        if (priceN.equals("")) {
+            priceN = "-1";
+        }
 
         Part part = request.getPart("image");
         InputStream fileContent = part.getInputStream();
         byte[] buffer = new byte[fileContent.available()];
         fileContent.read(buffer);
 
-        try {
-            manager.updateProduct(Integer.toString(prodID), nameN, catN, priceN, descN, stockN);
-            if (!part.getSubmittedFileName().equals("")) {
-                File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
-                OutputStream outStream = new FileOutputStream(targetFile);
-                outStream.write(buffer);
-            }
-            Product product = manager.findProduct(prodID);
+        Product product = new Product(prodID, nameN, catN, Double.parseDouble(priceN), descN, Integer.parseInt(stockN));
+        request.setAttribute("product", product);
+
+        if (!validator.validatePositive(Double.parseDouble(priceN))) {
+            request.setAttribute("priceErr", "price needs to be a positive number");
+            product = new Product(prodID, nameN, catN, 0.00, descN, Integer.parseInt(stockN));
             request.setAttribute("product", product);
             request.getRequestDispatcher("product_edit.jsp").include(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } else if (!validator.validatePositive(Integer.parseInt(stockN))) {
+            product = new Product(prodID, nameN, catN, Double.parseDouble(priceN), descN, 0);
+            request.setAttribute("product", product);
+            request.setAttribute("stockErr", "stock needs to be a positive number");
+            request.getRequestDispatcher("product_edit.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(nameN)) {
+            request.setAttribute("nameErr", "name needs to be filled");
+            request.getRequestDispatcher("product_edit.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(catN)) {
+            request.setAttribute("categoryErr", "category needs to be filled");
+            request.getRequestDispatcher("product_edit.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(descN)) {
+            request.setAttribute("descErr", "description needs to be filled");
+            request.getRequestDispatcher("product_edit.jsp").include(request, response);
+        } else {
+            try {
+                manager.updateProduct(Integer.toString(prodID), nameN, catN, priceN, descN, stockN);
+                if (!part.getSubmittedFileName().equals("")) {
+                    File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
+                    OutputStream outStream = new FileOutputStream(targetFile);
+                    outStream.write(buffer);
+                }
+                product = manager.findProduct(prodID);
+                request.setAttribute("product", product);
+                request.getRequestDispatcher("product_edit.jsp").include(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

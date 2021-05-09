@@ -5,6 +5,7 @@
  */
 package iotbay.controller;
 
+import iotbay.model.Product;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -44,6 +45,7 @@ public class ProductCreateServlet extends HttpServlet {
         String stock = request.getParameter("stock");
         String desc = request.getParameter("desc");
         DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        Validator validator = new Validator();
         String buildPath = getServletContext().getRealPath("");
         String iotBayPath = buildPath.substring(0, buildPath.length() - 9);
         String uploadPath = iotBayPath + "web/productPictures";
@@ -52,17 +54,47 @@ public class ProductCreateServlet extends HttpServlet {
         InputStream fileContent = part.getInputStream();
         byte[] buffer = new byte[fileContent.available()];
         fileContent.read(buffer);
+        if (stock.equals("")) {
+            stock = "-1";
+        }
+        if (price.equals("")) {
+            price = "-1";
+        }
+        request.setAttribute("name",name);
+        request.setAttribute("cat",category);
+        request.setAttribute("price",price);
+        request.setAttribute("stock",stock);
+        request.setAttribute("desc",desc);
 
-        try {
-            manager.addProduct(name, category, price, desc, stock);
-            int prodID = manager.findProduct(name).getProductID();
-            File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
-            OutputStream outStream = new FileOutputStream(targetFile);
-            outStream.write(buffer);
+        if (!validator.validatePositive(Double.parseDouble(price))) {
+            request.setAttribute("priceErr", "price needs to be a positive number");
+            request.setAttribute("price",0.00);
+            request.getRequestDispatcher("product_upload.jsp").include(request, response);
+        } else if (!validator.validatePositive(Integer.parseInt(stock))) {
+            request.setAttribute("stockErr", "stock needs to be a positive number");
+            request.setAttribute("stock",0);
+            request.getRequestDispatcher("product_upload.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(name)) {
+            request.setAttribute("nameErr", "name needs to be filled");
+            request.getRequestDispatcher("product_upload.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(category)) {
+            request.setAttribute("categoryErr", "category needs to be filled");
+            request.getRequestDispatcher("product_upload.jsp").include(request, response);
+        } else if (!validator.validateStringFilled(desc)) {
+            request.setAttribute("descErr", "description needs to be filled");
+            request.getRequestDispatcher("product_upload.jsp").include(request, response);
+        } else {
+            try {
+                manager.addProduct(name, category, price, desc, stock);
+                int prodID = manager.findProduct(name).getProductID();
+                File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
+                OutputStream outStream = new FileOutputStream(targetFile);
+                outStream.write(buffer);
 
-            response.sendRedirect("ProductListServlet");
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("ProductListServlet");
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
