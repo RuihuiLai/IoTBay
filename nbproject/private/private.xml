@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/edit_order.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/edit.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/src/java/iotbay/model/Order.java</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/profile.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/logout.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/view_particular_order.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/main.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/src/java/iotbay/model/Product.java</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/product.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/view_all_order.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/src/java/iotbay/model/dao/DBProductManager.java</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/product_upload.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/index.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/create_order.jsp</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/web/WEB-INF/web.xml</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/src/java/iotbay/model/dao/DBOrderManager.java</file>
+            <file>file:/Users/joshcelik-alvis/Desktop/IoTBay%204/src/java/iotbay/controller/ConnServlet.java</file>
+        </group>
+    </open-files>
+</project-private>

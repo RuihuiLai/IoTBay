@@ -20,8 +20,9 @@ public class Order implements Serializable{
     private String paymentID;
     private String userID;
     private Double totalPrice;
+    private String orderList;
 
-    public Order(int orderID, String status, Date orderTime, String shipmentID, String paymentID, String userID, Double totalPrice) {
+    public Order(int orderID, String status, Date orderTime, String shipmentID, String paymentID, String userID, Double totalPrice, String orderList) {
         this.orderID = orderID;
         this.status = status;
         this.orderTime = orderTime;
@@ -29,6 +30,7 @@ public class Order implements Serializable{
         this.paymentID = paymentID;
         this.userID = userID;
         this.totalPrice = totalPrice;
+        this.orderList = orderList;
     }
 
     public int getOrderID() {
@@ -85,6 +87,14 @@ public class Order implements Serializable{
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(String orderList) {
+        this.orderList = orderList;
     }
     
     
