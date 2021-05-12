@@ -16,12 +16,16 @@ public class Product implements Serializable{
     private String name;
     private String category;
     private Double price;
+    private String description;
+    private int stock;
 
-    public Product(int productID, String name, String category, Double price) {
+    public Product(int productID, String name, String category, Double price, String description, int stock) {
         this.productID = productID;
         this.name = name;
         this.category = category;
         this.price = price;
+        this.description = description;
+        this.stock = stock;
     }
 
     public int getProductID() {
@@ -55,5 +59,23 @@ public class Product implements Serializable{
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+
 }
 

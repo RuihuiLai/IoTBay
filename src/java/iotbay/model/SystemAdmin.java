@@ -15,8 +15,8 @@ public class SystemAdmin extends User{
     private Date endDate;
     private String position;
 
-    public SystemAdmin(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, Date dateOfBirth, String phoneNumber, Date startDate, Date endDate, String position) {
-        super(userID, firstName, lastName, eMail, password, gender, address, dateOfBirth, phoneNumber);
+    public SystemAdmin(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber, Date startDate, Date endDate, String position) {
+        super(userID, firstName, lastName, eMail, password, gender, address, phoneNumber);
         this.startDate = startDate;
         this.endDate = endDate;
         this.position = position;

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="iotbay.model.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,5 +19,6 @@
             <input type="button" value="Login" onclick="location.href = 'login.jsp'">
             <input type="button" value="Register" onclick="location.href = 'register.jsp'">
         </div>
+        <jsp:include page="/ConnServlet" flush="true" />
     </body>
 </html>

@@ -20,10 +20,9 @@ public class User implements Serializable{
     private String password;
     private String gender;
     private String address;
-    private Date dateOfBirth;
     private String phoneNumber;
 
-    public User(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, Date dateOfBirth, String phoneNumber) {
+    public User(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,7 +30,6 @@ public class User implements Serializable{
         this.password = password;
         this.gender = gender;
         this.address = address;
-        this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
     }
 
@@ -91,14 +89,6 @@ public class User implements Serializable{
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPhoneNumber() {
