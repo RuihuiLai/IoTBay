@@ -48,12 +48,12 @@ public class DBOrderManager {
     }
 
 //Add a order-data into the database   
-    public void addOrder(String status, String orderTime, int shipmentID, int paymentID, int userID, String totalPrice, String orderList) throws SQLException {                   //code for add-operation       
-        st.executeUpdate("INSERT INTO IOTUSER.\"ORDER\" (SHOPPINGLIST, STATUS, ORDERTIME, ORDERDATE, SHIPMENTID, PAYMENTID, USERID, PRODUCTID, TOTALPICE, ORDERLIST) " + "VALUES('" + status + "','" + orderTime + "','" + shipmentID + "','" + paymentID + "','" + userID + "','" + totalPrice + ")");
+    public void addOrder(String status, String orderTime, String shipmentID, String paymentID, String userID, String totalPrice, String orderList) throws SQLException {                   //code for add-operation       
+        st.executeUpdate("INSERT INTO IOTUSER.\"ORDER\" (STATUS, ORDERTIME, SHIPMENTID, PAYMENTID, USERID, TOTALPRICE, ORDERLIST) " + "VALUES('" + status + "','" + orderTime + "','" + shipmentID + "','" + paymentID + "','" + userID + "'," + totalPrice + ",'" + orderList + "')");
     }
     
-    public int getOrderID(int userID) throws SQLException {
-        ResultSet rs = st.executeQuery("SELECT TOP 1 * FROM IOTUSER.\"ORDER\" WHERE USERID=" + userID + " BY ORDERID DESC");
+    public int getOrderID(String userID) throws SQLException {
+        ResultSet rs = st.executeQuery("SELECT MAX(ORDERID) AS LargestOrderID FROM IOTUSER.\"ORDER\" WHERE USERID='" + userID + "'");
         while (rs.next()) {
             int orderID = rs.getInt(1);
             return orderID;
@@ -62,9 +62,9 @@ public class DBOrderManager {
     }
 
 //update a order details in the database   
-    public void updateOrder(int orderID, String status, String orderTime, int shipmentID, int paymentID, int userID, String totalPrice, String orderList) throws SQLException {
+    public void updateOrder(int orderID, String status, String orderTime, String shipmentID, String paymentID, String userID, String totalPrice, String orderList) throws SQLException {
         //code for update-operation   
-        st.executeUpdate("UPDATE IOTUSER.\"ORDER\" SET STATUS='" + status + "', ORDERTIME='" + orderTime + "',SHIPMENTID='" + shipmentID + "',PAYMENTID='" + paymentID + "',USERID='" + userID + "',TOTALPRICE='" + totalPrice + "',ORDERLIST='" + orderList);
+        st.executeUpdate("UPDATE IOTUSER.\"ORDER\" SET STATUS='" + status + "',ORDERTIME='" + orderTime + "',SHIPMENTID='" + shipmentID + "',PAYMENTID='" + paymentID + "',USERID='" + userID + "',TOTALPRICE=" + totalPrice + ",ORDERLIST='" + orderList + "'");
     }
 
 //delete a user from the database   

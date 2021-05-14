@@ -1,0 +1,142 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 21, 2021, 9:01:29 PM
+    Author     : Reyvaldo
+*/
+
+body{
+    background: url("regstr.png")no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+}
+
+.register_form {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    padding: 25px;
+    border: 2px solid black;
+    outline:none;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 10px;
+    font-family: Arial;
+}
+
+.register_form form h1{
+    font-size: 30px;
+    text-align: center;
+    margin-top: -2%;
+    color: black;
+}
+
+.register_form form input{
+    position: relative;
+    width: 96%;
+    padding: 10px;
+    color: black;
+    border: 2px solid black;
+    outline:none;
+    font-size: 14px;
+    letter-spacing:1px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px auto;
+}
+
+.register_form form select{
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    color: black;
+    border: 2px solid black;
+    outline:none;
+    font-size: 14px;
+    letter-spacing:1px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px auto;
+}
+
+.register_form form input[type="submit"]{
+    width: 100%;
+    background-color: white; 
+    color:black;
+    cursor:pointer;
+}
+
+.register_form form input[type="submit"]:hover{
+    background-color: grey;
+    transition-duration: 0.2s;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    color:white;
+}
+
+.register_form form input[type="submit"]:active{
+    background-color: black;
+    color:white;
+}
+
+
+p{
+    font-size: 14px;    
+    color: black;
+    margin-top: -1%;
+    text-align: center;
+}
+
+p.head{
+    font-size: 12px;
+    color: black;
+    margin-top: -1%;
+    margin-bottom: -1%;
+    text-align: left;
+}
+
+table,td{
+    margin-top: -3px;
+    margin-bottom: -15px;
+}
+table{
+    width:100%;
+}
+
+td{
+    position: relative;
+    top:-8px;
+    bottom:-8px;
+}
+
+th{
+    font-weight: normal;
+    padding-bottom: -10px;
+}
+
+
+.register_form form table input{
+    width: 92.5%;
+}
+
+.register_form form .address input{
+    margin-top:15px;
+    width: 81%;
+}
+
+a:link {
+    color: #7889db;
+}
+
+/* visited link */
+a:visited {
+    color: #7889db;
+}
+
+.register_form form input[type="checkbox"]{
+    all:revert;
+}

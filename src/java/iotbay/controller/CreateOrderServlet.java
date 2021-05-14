@@ -33,11 +33,10 @@ public class CreateOrderServlet extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
 
         try {
-            manager.addOrder("ARRIVING", "01/01/2021", 1111,1111, customer.getUserID(), totalPrice, prodID);
-            int orderID = manager.getOrderID(customer.getUserID());
-            manager.updateOrder(orderID, "ARRIVING", "01/01/2021", orderID, orderID, customer.getUserID(), totalPrice, prodID);
-            request.setAttribute("value", orderID);
-            request.getRequestDispatcher("view_particular_order.jsp").include(request, response);
+            manager.addOrder("ARRIVING", "01/01/2021", "1111","1111", "1111", totalPrice, prodID);
+            int orderID = manager.getOrderID("1111");
+            manager.updateOrder(orderID, "ARRIVING", "01/01/2021", Integer.toString(orderID), Integer.toString(orderID), "1111", totalPrice, prodID);
+            response.sendRedirect("ViewParticularOrderServlet?value=" + orderID);
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

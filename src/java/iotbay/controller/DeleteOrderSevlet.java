@@ -27,13 +27,14 @@ public class DeleteOrderSevlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBOrderManager manager = (DBOrderManager) session.getAttribute("manager");
-        String orderID = request.getParameter("ORDERID");
+        String prodID = request.getParameter("ID");
+        String totalPrice = request.getParameter("PRICE");
         try {
-            manager.deleteOrder(orderID);
-            request.getRequestDispatcher("view_all_order.jsp").include(request, response);
+            int orderID = manager.getOrderID("1111");
+            manager.updateOrder(orderID, "ARRIVING", "01/01/2021", Integer.toString(orderID), Integer.toString(orderID), "1111", totalPrice, prodID);
+            request.getRequestDispatcher("ViewAllOrderServlet").include(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
