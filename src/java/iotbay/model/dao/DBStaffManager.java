@@ -38,14 +38,14 @@ public class DBStaffManager {
         return null;
     }
 //Add a user-data into the database   
-    public void addStaff(String firstName, String lastName, String eMail, String password, String gender, String address, String dob, String phoneNumber, String startDate, String endDate, String position) throws SQLException {                   //code for add-operation       
-        st.executeUpdate("INSERT INTO IOTUSER.STAFF (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GENDER, ADDRESS,DOB, PHONENUMBER, STARTDATE, ENDDATE, POSITION) " + "VALUES('" + firstName + "','" + lastName + "','" + eMail + "','" + password + "','" + gender + "','" + address + "','" + dob + "','" + phoneNumber + "','" + startDate + "','" + endDate + "','" + position + "')");
+    public void addStaff(String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber, String startDate, String endDate, String position) throws SQLException {                   //code for add-operation       
+        st.executeUpdate("INSERT INTO IOTUSER.STAFF (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GENDER, ADDRESS, PHONENUMBER, STARTDATE, ENDDATE, POSITION) " + "VALUES('" + firstName + "','" + lastName + "','" + eMail + "','" + password + "','" + gender + "','" + address + "','" + phoneNumber + "','" + startDate + "','" + endDate + "','" + position + "')");
     }
 
 //update a user details in the database   
-    public void updateStaff(String userID, String firstName, String lastName, String eMail, String password, String gender, String address, String dob, String phoneNumber, String startDate, String endDate, String position) throws SQLException {
+    public void updateStaff(String userID, String firstName, String lastName, String eMail, String password, String gender, String address,  String phoneNumber, String startDate, String endDate, String position) throws SQLException {
         //code for update-operation   
-        st.executeUpdate("UPDATE IOTUSER.STAFF SET FIRSTNAME='" + firstName + "', LASTNAME='" + lastName + "',EMAIL='" + eMail + "',PASSWORD='" + password + "',GENDER='" + gender + "',ADDRESS='" + address + "',DOB='" + dob + "',PHONENUMBER='" + phoneNumber + "',STARTDATE='" + startDate + "', ENDDATE='"+ endDate +
+        st.executeUpdate("UPDATE IOTUSER.STAFF SET FIRSTNAME='" + firstName + "', LASTNAME='" + lastName + "',EMAIL='" + eMail + "',PASSWORD='" + password + "',GENDER='" + gender + "',ADDRESS='" + address + "', PHONENUMBER='" + phoneNumber + "',STARTDATE='" + startDate + "', ENDDATE='"+ endDate +
                 "' WHERE USERID=" + userID + "");
     }
 

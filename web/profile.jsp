@@ -4,6 +4,7 @@
     Author     : Reyvaldo
 --%>
 
+<%@page import="iotbay.model.Staff"%>
 <%@page import="iotbay.model.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,9 +16,10 @@
         <title>Profile Page</title>
     </head>
     <body>
-        <h1>Customer Profile</h1>
+        <h1>Profile</h1>
         <%
             Customer customer = (Customer) session.getAttribute("customer");
+            Staff staff = (Staff) session.getAttribute("staff");
             String[] address = customer.getAddress().split("§");
             for (int i = 0; i < 5; i++) {
                 if (address[i].equals("null")) {

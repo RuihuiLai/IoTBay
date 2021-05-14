@@ -21,6 +21,7 @@
     <body>
         <span id="links"><a href="profile.jsp"> Profile</a> | <a href="LogoutServlet"> Logout</a></span>
         <h1>Main page</h1>
+        
         <%
             DBConnector connector = new DBConnector();
             Connection conn = connector.openConnection();

@@ -25,6 +25,12 @@
         <div class="login_form">
             <form action="LoginServlet" method="post">
                 <h1>Login <span class="message"><%=(existErr != null ? existErr : "") %></span></h1>
+                <input type="radio" id="customer" name="role" value="customer">
+                <label for="customer">Customer</label><br>
+                <input type="radio" id="staff" name="role" value="staff">
+                <label for="staff">Staff</label><br>
+                <input type="radio" id="system_admin" name="role" value="system_admin">
+                <label for="staff">System Admin</label><br>
                 <p class ="head ">E-mail</p>
                 <input type="text" name="email" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required>
                 <p class ="head">Password</p>

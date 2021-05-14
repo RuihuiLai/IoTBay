@@ -15,6 +15,8 @@ import iotbay.model.dao.*;
 public class ConnServlet extends HttpServlet {
     private DBConnector db;
     private DBCustomerManager manager;
+    private DBStaffManager manager1;
+    private DBSystemAdminManager manager2;
     private Connection conn;
 
     @Override //Create and instance of DBConnector for the deployment session
@@ -34,11 +36,15 @@ public class ConnServlet extends HttpServlet {
         conn = db.openConnection();
         try {
             manager = new DBCustomerManager(conn);
+            manager1 = new DBStaffManager(conn);
+            manager2 = new DBSystemAdminManager(conn);
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         //export the DB manager to the view-session (JSPs)
         session.setAttribute("manager", manager);
+        session.setAttribute("manager1", manager1);
+        session.setAttribute("manager2", manager2);
     }
 
     @Override //Destroy the servlet and release the resources of the application (terminate also the db connection)

@@ -27,6 +27,10 @@
         <div class="register_form">
             <form action="RegisterServlet" method="post">
                 <h1> Register </h1>
+                <input type="radio" id="customer" name="role" value="customer">
+                <label for="customer">Customer</label><br>
+                <input type="radio" id="staff" name="role" value="staff">
+                <label for="staff">Staff</label><br>
                 <p class ="head">E-mail</p>
                 <input type="text" name="email" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required>
                 <table>
