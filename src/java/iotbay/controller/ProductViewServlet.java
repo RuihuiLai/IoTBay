@@ -26,15 +26,15 @@ public class ProductViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
         int prodID = Integer.parseInt(request.getParameter("ID"));
 
         try {
-            Product products = manager.findProduct(prodID);
+            Product products = pManager.findProduct(prodID);
             request.setAttribute("product", products);
             request.getRequestDispatcher("product.jsp").include(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductViewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

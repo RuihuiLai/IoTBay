@@ -50,7 +50,7 @@
                 <td style="text-align: center"><img src="productPictures/<%=product.getProductID()%>.jpg" onerror="this.onerror=null;this.src='productPictures/noImage.jpg'" height="64" width="64"></td>
                 <td><%=product.getName()%></td>
                 <td><%=product.getCategory()%></td>
-                <td style="text-align: center"><%=product.getPrice()%></td>
+                <td style="text-align: center">$ <%=product.getPrice()%></td>
                 <td style="text-align: center"><%=product.getStock()%></td>
                 <td style="text-align: center"><a href="ProductEditServlet?ID=<%=product.getProductID()%>">edit</a></td>
                 <td style="text-align: center"><a href="ProductDeleteServlet?ID=<%=product.getProductID()%>" onclick="">delete</a></td>

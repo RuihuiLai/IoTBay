@@ -8,7 +8,6 @@ package iotbay.controller;
 import iotbay.model.Product;
 import iotbay.model.dao.DBProductManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,7 +27,7 @@ public class MainPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
         String filter = request.getParameter("filter");
         String cat = request.getParameter("category");
         if (cat.equals("ALL")) {
@@ -36,8 +35,8 @@ public class MainPageServlet extends HttpServlet {
         }
 
         try {
-            ArrayList<Product> products = manager.filterCategoryAndName(filter, cat);
-            ArrayList<String> categories = manager.getCategories();
+            ArrayList<Product> products = pManager.filterCategoryAndName(filter, cat);
+            ArrayList<String> categories = pManager.getCategories();
             request.setAttribute("list", products);
             request.setAttribute("filter", filter);
             request.setAttribute("cat", cat);
@@ -47,23 +46,23 @@ public class MainPageServlet extends HttpServlet {
             request.setAttribute("cate", categories);
             request.getRequestDispatcher("main.jsp").include(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainPageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
 
         try {
-            ArrayList<Product> products = manager.fetchProducts();
-            ArrayList<String> categories = manager.getCategories();
+            ArrayList<Product> products = pManager.fetchProducts();
+            ArrayList<String> categories = pManager.getCategories();
             request.setAttribute("list", products);
             request.setAttribute("cate", categories);
             request.getRequestDispatcher("main.jsp").include(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainPageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

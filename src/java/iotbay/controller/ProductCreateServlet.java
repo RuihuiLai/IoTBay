@@ -5,7 +5,6 @@
  */
 package iotbay.controller;
 
-import iotbay.model.Product;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -44,7 +43,7 @@ public class ProductCreateServlet extends HttpServlet {
         String price = request.getParameter("price");
         String stock = request.getParameter("stock");
         String desc = request.getParameter("desc");
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
         Validator validator = new Validator();
         String buildPath = getServletContext().getRealPath("");
         String iotBayPath = buildPath.substring(0, buildPath.length() - 9);
@@ -85,8 +84,8 @@ public class ProductCreateServlet extends HttpServlet {
             request.getRequestDispatcher("product_upload.jsp").include(request, response);
         } else {
             try {
-                manager.addProduct(name, category, price, desc, stock);
-                int prodID = manager.findProduct(name).getProductID();
+                pManager.addProduct(name, category, price, desc, stock);
+                int prodID = pManager.findProduct(name).getProductID();
                 File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
                 OutputStream outStream = new FileOutputStream(targetFile);
                 outStream.write(buffer);

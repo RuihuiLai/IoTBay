@@ -8,9 +8,7 @@ package iotbay.controller;
 import iotbay.model.Product;
 import iotbay.model.dao.DBProductManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,15 +26,15 @@ public class ProductEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
         int prodID = Integer.parseInt(request.getParameter("ID"));
 
         try {
-            Product product = manager.findProduct(prodID);
+            Product product = pManager.findProduct(prodID);
             request.setAttribute("product", product);
             request.getRequestDispatcher("product_edit.jsp").include(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -39,7 +39,7 @@ public class ProductUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DBProductManager manager = (DBProductManager) session.getAttribute("manager");
+        DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
         Validator validator = new Validator();
         int prodID = Integer.parseInt(request.getParameter("ID"));
         String nameN = request.getParameter("name");
@@ -86,17 +86,17 @@ public class ProductUpdateServlet extends HttpServlet {
             request.getRequestDispatcher("product_edit.jsp").include(request, response);
         } else {
             try {
-                manager.updateProduct(Integer.toString(prodID), nameN, catN, priceN, descN, stockN);
+                pManager.updateProduct(Integer.toString(prodID), nameN, catN, priceN, descN, stockN);
                 if (!part.getSubmittedFileName().equals("")) {
                     File targetFile = new File(uploadPath + File.separator + prodID + ".jpg");
                     OutputStream outStream = new FileOutputStream(targetFile);
                     outStream.write(buffer);
                 }
-                product = manager.findProduct(prodID);
+                product = pManager.findProduct(prodID);
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("product_edit.jsp").include(request, response);
             } catch (SQLException ex) {
-                Logger.getLogger(ProductCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProductUpdateServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
