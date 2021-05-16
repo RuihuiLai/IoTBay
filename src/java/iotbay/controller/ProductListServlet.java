@@ -6,6 +6,7 @@
 package iotbay.controller;
 
 import iotbay.model.Product;
+import iotbay.model.Staff;
 import iotbay.model.dao.DBProductManager;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,15 +54,20 @@ public class ProductListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
+        Staff staff = (Staff) session.getAttribute("staff");
 
-        try {
-            ArrayList<Product> products = pManager.fetchProducts();
-            ArrayList<String> categories = pManager.getCategories();
-            request.setAttribute("list", products);
-            request.setAttribute("cate", categories);
-            request.getRequestDispatcher("staff_prod_list.jsp").include(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductListServlet.class.getName()).log(Level.SEVERE, null, ex);
+        if (staff == null) {
+            request.getRequestDispatcher("MainPageServlet?staffOnly=only staff can access this").include(request, response);
+        } else {
+            try {
+                ArrayList<Product> products = pManager.fetchProducts();
+                ArrayList<String> categories = pManager.getCategories();
+                request.setAttribute("list", products);
+                request.setAttribute("cate", categories);
+                request.getRequestDispatcher("staff_prod_list.jsp").include(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

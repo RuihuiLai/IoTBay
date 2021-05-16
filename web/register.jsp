@@ -17,17 +17,28 @@
         <div>
             <span id="links"> <a href="index.jsp">Home</a></span>
         </div>
+        <%
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passErr = (String) session.getAttribute("passErr");
+            String firstnameErr = (String) session.getAttribute("firstnameErr");
+            String lastnameErr = (String) session.getAttribute("lastnameErr");
+        %>
         <div class="register_form">
-            <form action="welcome.jsp" method="post">
-                <h1>Register</h1>
+            <form action="RegisterServlet" method="post">
+                <h1> Register </h1>
+                <input type="radio" id="customer" name="role" value="customer">
+                <label for="customer">Customer</label><br>
+                <input type="radio" id="staff" name="role" value="staff">
+                <label for="staff">Staff</label><br>
                 <p class ="head">E-mail</p>
-                <input type="text" name="email" placeholder="E-mail" required>
+                <input type="text" name="email" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required>
                 <table>
                     <tr><th><p class ="head">First Name</p></th> <th><p class ="head">Last Name</p></th></tr>
-                    <tr><td><input type="text" name="first_name" placeholder="first name" required></td> <td><input type="text" name="last_name" placeholder="last name" required></td></tr>
+                    <tr><td><input type="text" name="first_name" placeholder="<%=(firstnameErr != null ? firstnameErr : "Enter first name")%>" required></td> <td><input type="text" name="last_name" placeholder="<%=(lastnameErr != null ? lastnameErr : "Enter last name")%>" required></td></tr>
                 </table>
                 <p class ="head">Password</p>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required>
                 <p class ="head">Gender</p>
                 <select class="select" name="gender">
                     <option value="male">Male</option>

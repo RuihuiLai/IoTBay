@@ -5,8 +5,6 @@
  */
 package iotbay.model;
 
-import java.util.Date;
-
 /**
  *
  * @author Reyvaldo
@@ -14,9 +12,8 @@ import java.util.Date;
 public class Customer extends User{
     private boolean subscription;
 
-    public Customer(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, Date dateOfBirth, String phoneNumber, boolean subscription) {
-        super(userID, firstName, lastName, eMail, password, gender, address, dateOfBirth, phoneNumber);
-        this.subscription = subscription;
+    public Customer(int userID, String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber) {
+        super(userID, firstName, lastName, eMail, password, gender, address, phoneNumber);
     }
 
     public boolean isSubscription() {

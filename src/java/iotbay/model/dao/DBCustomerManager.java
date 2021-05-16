@@ -39,24 +39,22 @@ public class DBCustomerManager {
                 String customerLastName = rs.getString(3);
                 String customerGender = rs.getString(6);
                 String customerAddress = rs.getString(7);
-                Date customerDOB = rs.getDate(8);
-                String customerPhone = rs.getString(9);
-                boolean subscription = rs.getBoolean(10);
-                return new Customer(customerID, customerFirstName, customerLastName, customerEmail, customerPassword, customerGender, customerAddress, customerDOB, customerPhone, subscription);
+                String customerPhone = rs.getString(8);
+                return new Customer(customerID, customerFirstName, customerLastName, customerEmail, customerPassword, customerGender, customerAddress, customerPhone);
             }
         }
         return null;
     }
 
 //Add a user-data into the database   
-    public void addCustomer(String firstName, String lastName, String eMail, String password, String gender, String address, String dob, String phoneNumber, String subscription) throws SQLException {                   //code for add-operation       
-        st.executeUpdate("INSERT INTO IOTUSER.CUSTOMER (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GENDER, ADDRESS,DOB, PHONENUMBER, SUBSCRIPTION) " + "VALUES('" + firstName + "','" + lastName + "','" + eMail + "','" + password + "','" + gender + "','" + address + "','" + dob + "','" + phoneNumber + "','" + subscription + "')");
+    public void addCustomer(String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber) throws SQLException {                   //code for add-operation       
+        st.executeUpdate("INSERT INTO IOTUSER.CUSTOMER (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GENDER, ADDRESS, PHONENUMBER) " + "VALUES('" + firstName + "','" + lastName + "','" + eMail + "','" + password + "','" + gender + "','" + address + "','" + phoneNumber + "')");
     }
 
 //update a user details in the database   
-    public void updateCustomer(String userID, String firstName, String lastName, String eMail, String password, String gender, String address, String dob, String phoneNumber, String subscription) throws SQLException {
+    public void updateCustomer(String userID, String firstName, String lastName, String eMail, String password, String gender, String address, String phoneNumber) throws SQLException {
         //code for update-operation   
-        st.executeUpdate("UPDATE IOTUSER.CUSTOMER SET FIRSTNAME='" + firstName + "', LASTNAME='" + lastName + "',EMAIL='" + eMail + "',PASSWORD='" + password + "',GENDER='" + gender + "',ADDRESS='" + address + "',DOB='" + dob + "',PHONENUMBER='" + phoneNumber + "',SUBSCRIPTION='" + subscription + "' WHERE USERID=" + userID + "");
+        st.executeUpdate("UPDATE IOTUSER.CUSTOMER SET FIRSTNAME='" + firstName + "', LASTNAME='" + lastName + "',EMAIL='" + eMail + "',PASSWORD='" + password + "',GENDER='" + gender + "',ADDRESS='" + address + "', PHONENUMBER='" + phoneNumber + "' WHERE USERID=" + userID + "");
     }
 
 //delete a user from the database   
@@ -77,10 +75,9 @@ public class DBCustomerManager {
             String customerPassword = rs.getString(5);
             String customerGender = rs.getString(6);
             String customerAddress = rs.getString(7);
-            Date customerDOB = rs.getDate(8);
-            String customerPhone = rs.getString(9);
-            boolean subscription = rs.getBoolean(10);
-            customers.add(new Customer(customerID, customerFirstName, customerLastName, customerEmail, customerPassword, customerGender, customerAddress, customerDOB, customerPhone, subscription));
+            String customerPhone = rs.getString(8);
+            boolean subscription = rs.getBoolean(9);
+            customers.add(new Customer(customerID, customerFirstName, customerLastName, customerEmail, customerPassword, customerGender, customerAddress, customerPhone));
         }
         return customers;
     }

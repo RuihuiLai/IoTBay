@@ -85,7 +85,7 @@ public class TestCustomerDB {
         System.out.print("CUSTOMER subscription: ");
         String sub = in.nextLine();
         try {
-            db.addCustomer(first, last, email, password, gender, address, dob, number, sub);
+            db.addCustomer(first, last, email, password, gender, address, number);
         } catch (SQLException ex) {
             Logger.getLogger(TestCustomerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,7 +131,7 @@ public class TestCustomerDB {
                 String number = in.nextLine();
                 System.out.print("CUSTOMER subscription: ");
                 String sub = in.nextLine();
-                db.updateCustomer(id, first, last, email, password, gender, address, dob, number, sub);
+                db.updateCustomer(id, first, last, email, password, gender, address, number);
             } else {
                 System.out.println("Customer not found");
             }
@@ -161,7 +161,7 @@ public class TestCustomerDB {
             ArrayList<Customer> customers = db.fetchCustomers();
             System.out.println("CUSTOMERS TABLE:");
             customers.stream().forEach((customer) -> {
-                System.out.printf("%-10s %-15s %-15s %-20s %-15s %-8s %-40s %-15s %-15s %-15s\n", customer.getUserID(), customer.getFirstName(), customer.getLastName(), customer.geteMail(), customer.getPassword(), customer.getGender(), customer.getAddress(), customer.getDateOfBirth(), customer.getPhoneNumber(), customer.isSubscription());
+                System.out.printf("%-10s %-15s %-15s %-20s %-15s %-8s %-40s %-15s %-15s %-15s\n", customer.getUserID(), customer.getFirstName(), customer.getLastName(), customer.geteMail(), customer.getPassword(), customer.getGender(), customer.getAddress(), customer.getPhoneNumber(), customer.isSubscription());
             });
             System.out.println();
         } catch (SQLException ex) {

@@ -54,10 +54,12 @@ public class MainPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBProductManager pManager = (DBProductManager) session.getAttribute("pManager");
+        String staffOnly = request.getParameter("staffOnly");
 
         try {
             ArrayList<Product> products = pManager.fetchProducts();
             ArrayList<String> categories = pManager.getCategories();
+            request.setAttribute("staffOnly", staffOnly);
             request.setAttribute("list", products);
             request.setAttribute("cate", categories);
             request.getRequestDispatcher("main.jsp").include(request, response);

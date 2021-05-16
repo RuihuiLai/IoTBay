@@ -19,17 +19,19 @@
         <title>Main Page</title>
     </head>
     <body>
-        <span id="links"><a href="ProductListServlet"> prod_edit</a> | <a href="logout.jsp"> Logout</a></span>
+        <span id="links"><a href="ProductListServlet"> Staff View</a> | <a href="profile.jsp"> Profile</a> | <a href="ViewAllOrderServlet"> View All Orders</a> | <a href="LogoutServlet"> Logout</a></span>
         <h1>Main page</h1>
         <%
             ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("list");
             ArrayList<String> listCategory = (ArrayList<String>) request.getAttribute("cate");
             String filter = (String) request.getAttribute("filter");
             String cat = (String) request.getAttribute("cat");
+            String staffOnly = (String) request.getAttribute("staffOnly");
             int length = products.size();
         %>
 
         <center><div class="mainTable">
+                <h1><%=(staffOnly != null ? staffOnly : "")%></h1>
             item count: <%=length%>
             <form action="MainPageServlet" method="post" autocomplete="off">
                 <input type="text" name="filter" value="<%=(filter != null ? filter : "")%>" placeholder="item name">
